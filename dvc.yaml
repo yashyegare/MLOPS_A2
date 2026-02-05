@@ -1,3 +1,10 @@
 stages:
   train:
     cmd: python experiment-tracking.py
+params:
+- dvclive/params.yaml
+metrics:
+- dvclive/metrics.json
+plots:
+- dvclive/plots/metrics:
+    x: step

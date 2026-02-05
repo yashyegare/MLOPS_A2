@@ -9,6 +9,20 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 
+from dvclive import Live
+
+# Use save_dvc_exp=True to automatically create a DVC experiment
+with Live(save_dvc_exp=True) as live:
+    # Your training logic here
+    live.log_param("learning_rate", 0.01)
+    
+    for epoch in range(10):
+        # Simulate training
+        accuracy = 0.1 * epoch 
+        
+        live.log_metric("accuracy", accuracy)
+        live.next_step() # Call this at the end of each epoch/iteration
+
 # 1. Setup MLflow Connection
 # Ensure your server is running: mlflow server --host 127.0.0.1 --port 5000
 mlflow.set_tracking_uri(uri='http://localhost:5000')
